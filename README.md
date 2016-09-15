@@ -20,7 +20,7 @@ for your setup.
 After that you can create the project:
 
 ```
-git clone ttps://github.com/Contraric/drupal-project.git some-dir
+git clone https://github.com/Contraric/drupal-project.git some-dir
 cd some-dir
 composer install
 ```
