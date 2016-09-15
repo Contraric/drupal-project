@@ -37,9 +37,20 @@ class ScriptHandler {
 
     // Prepare the settings file for installation
     if (!$fs->exists($root . '/sites/default/settings.php') and $fs->exists($root . '/sites/default/default.settings.php')) {
-      $fs->copy($root . '/sites/default/default.settings.php', $root . '/sites/default/settings.php');
+     $fs->copy($root . '/sites/default/default.settings.php', $root . '/sites/default/settings.php');
+      $content  = "if (file_exists(__DIR__ . '/settings.local.php')) {\n";
+      $content .= "  include __DIR__ . '/settings.local.php';\n";
+      $content .= "}\n";
+      file_put_contents($root . '/sites/default/settings.php', $content, FILE_APPEND);
       $fs->chmod($root . '/sites/default/settings.php', 0666);
       $event->getIO()->write("Create a sites/default/settings.php file with chmod 0666");
+      $fs->copy($root . '/sites/example.settings.local.php', $root . '/sites/default/settings.local.php');
+      $event->getIO()->write("Create a sites/default/settings.local.php file");
+      $content  = "\nparameters:\n";
+      $content .= "  twig.config:\n";
+      $content .= "    debug: true\n";
+      file_put_contents($root . '/sites/development.services.yml', $content, FILE_APPEND);
+      $event->getIO()->write("Enable twig debug settings in sites/development.services.yml");
     }
 
     // Prepare the services file for installation
