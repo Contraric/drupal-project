@@ -11,13 +11,17 @@
     ],
     "repositories": [
         {
+            "type": "vcs",
+            "url": "https://github.com/Contraric/drupal-scaffold"
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         }
     ],
     "require": {
         "composer/installers": "^1.2",
-        "drupal-composer/drupal-scaffold": "^2.2",
+        "drupal-composer/drupal-scaffold": "dev-master",
         "cweagans/composer-patches": "~1.0",
         "drupal/core": "~8.1",
         "drush/drush": "~8.0",
